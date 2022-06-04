@@ -1,14 +1,17 @@
 import fs from 'fs';
+import {invokeError} from "./utils";
+
 export const create = async () => {
-
-    if (fs.existsSync('files/fresh.txt')) {
-       throw new Error('test')
-    }
-    fs.appendFile('files/fresh.txt', 'I am fresh and young', (err) => {
-        if (err) {
-            console.log('Error', err)
+    try {
+        if (fs.existsSync('files/fresh.txt')) {
+            invokeError('FS operation failed')
         }
-    });
+        fs.appendFile('files/fresh.txt', 'I am fresh and young', (err) => {
+            if (err) {
+                invokeError(err)
+            }
+        });
+    } catch (error) {
+        console.log(error)
+    }
 };
-
-create();
