@@ -1,8 +1,9 @@
 import fs from 'fs';
-import {invokeError} from "./utils.js";
+import {getDirname, invokeError} from "./utils.js";
 
 export const list = async () => {
-    const path = 'files'
+    const __dirname = getDirname();
+    const path = `${__dirname}/files`
 
     if (!fs.existsSync(path)) {
         invokeError('FS operation failed')
@@ -14,3 +15,4 @@ export const list = async () => {
         console.log(files)
     });
 };
+list()

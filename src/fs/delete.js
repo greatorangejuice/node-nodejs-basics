@@ -1,9 +1,11 @@
 import fs from 'fs';
-import {invokeError} from "./utils.js";
+import {getDirname, invokeError} from "./utils.js";
 
 export const remove = async () => {
     try {
-        const path = 'files/fileToRemove.txt'
+        const __dirname = getDirname();
+        const path = `${__dirname}/files/fileToRemove.txt`
+
         if (!fs.existsSync(path)) {
             invokeError('FS operation failed')
         }
@@ -16,3 +18,4 @@ export const remove = async () => {
         console.log(e)
     }
 };
+remove()

@@ -1,10 +1,11 @@
 import fs from 'fs';
-import {invokeError} from "./utils.js";
+import {invokeError, getDirname} from "./utils.js";
 
 export const rename = async () => {
     try {
-        const oldPath = 'files/wrongfilename.txt';
-        const newPath = 'files/properFilename.md';
+        const __dirname = getDirname();
+        const oldPath = `${__dirname}/files/wrongfilename.txt`;
+        const newPath = `${__dirname}/files/properFilename.md`;
         if (fs.existsSync(newPath)) {
             invokeError('FS operation failed')
         }
@@ -17,3 +18,4 @@ export const rename = async () => {
         console.log(e)
     }
 };
+rename()

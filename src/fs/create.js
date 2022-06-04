@@ -1,12 +1,14 @@
 import fs from 'fs';
-import {invokeError} from "./utils";
+import {getDirname, invokeError} from './utils.js'
 
 export const create = async () => {
+    const __dirname = getDirname();
+    const dest = `${__dirname}/files/fresh.txt`;
     try {
-        if (fs.existsSync('files/fresh.txt')) {
+        if (fs.existsSync(dest)) {
             invokeError('FS operation failed')
         }
-        fs.appendFile('files/fresh.txt', 'I am fresh and young', (err) => {
+        fs.appendFile(dest, 'I am fresh and young', (err) => {
             if (err) {
                 invokeError(err)
             }
@@ -15,3 +17,4 @@ export const create = async () => {
         console.log(error)
     }
 };
+create()

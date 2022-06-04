@@ -1,10 +1,11 @@
 import fs from 'fs';
-import {invokeError} from "./utils.js";
-
+import {invokeError,getDirname} from "./utils.js";
 
 export const copy = async () => {
-    const src = 'files';
-    const dest = 'copy_files';
+    const __dirname = getDirname();
+    const src = `${__dirname}/files`;
+    const dest = `${__dirname}/copy_files`;
+
     try {
         if (fs.existsSync(dest)) {
             invokeError('FS operation failed')
@@ -14,3 +15,4 @@ export const copy = async () => {
         console.log(e)
     }
 };
+copy()

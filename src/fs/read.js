@@ -1,9 +1,10 @@
 import fs from 'fs';
-import {invokeError} from "./utils.js";
+import {getDirname, invokeError} from "./utils.js";
 
 export const read = async () => {
     try {
-        const path = 'files/fileToRead.txt'
+        const __dirname = getDirname();
+        const path = `${__dirname}/files/fileToRead.txt`
         if (!fs.existsSync(path)) {
             invokeError('FS operation failed')
         }
@@ -17,3 +18,4 @@ export const read = async () => {
         console.log(e)
     }
 };
+read()
