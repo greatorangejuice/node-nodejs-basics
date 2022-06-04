@@ -1,3 +1,8 @@
+import fs from 'fs';
+import {Transform} from 'stream'
+
 export const transform = async () => {
-    // Write your code here 
+    const readStream = fs.createReadStream(process.stdin);
+
+
 };
