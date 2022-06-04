@@ -1,3 +1,7 @@
 export const parseEnv = () => {
-    // Write your code here 
+    for (let arg in process.env) {
+        if (/rss|RSS/.test(arg)) {
+            console.log(`${arg}=${process.env[arg]}`)
+        }
+    }
 };
