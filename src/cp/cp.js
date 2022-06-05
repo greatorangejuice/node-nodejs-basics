@@ -1,10 +1,11 @@
 import child_process from 'child_process'
-import path from 'path';
+import path, {dirname} from 'path';
+import {fileURLToPath} from "url";
 
-// export const spawnChildProcess = async (args) => {
-//     const child = child_process.fork(path.join(path.resolve(), 'files', 'script.js'), args)
-//     console.log(child.pid)
-// };
+const getDirname = () => {
+    const __filename = fileURLToPath(import.meta.url)
+    return dirname(__filename);
+}
 
 const parseArgs = () => {
     for (let j = 0; j < process.argv.length; j++) {
@@ -15,11 +16,11 @@ const parseArgs = () => {
 };
 
 export const spawnChildProcess = async (args) => {
-
-    const ls = child_process.spawn('node', [path.join(path.resolve(), 'files', 'script.js'), ...args])
-
+    const __dirname = getDirname();
+    const ls = child_process.spawn('node', [path.join(__dirname, 'files', 'script.js'), ...args])
     ls.stdin.write(parseArgs());
 
+    ls.stdout.pipe(process.stdout)
     ls.stdout.on('data', (data) => {
         console.log(`(master) stdout: ${data}`);
     });

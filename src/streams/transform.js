@@ -8,6 +8,5 @@ const reverseStream = new Transform({transform(chunk, encoding, callback) {
 
 export const transform = async () => {
     process.stdin.pipe(reverseStream).pipe(process.stdout);
-    console.log(process.stdin)
 };
 await transform()
