@@ -1,9 +1,13 @@
-import fs from 'fs';
 import {Transform} from 'stream'
-import path from 'path';
+
+const reverseStream = new Transform({transform(chunk, encoding, callback) {
+        const stringedChunk = chunk.toString();
+        const reversedChunk = stringedChunk.split('').reverse().join('');
+        console.log(reversedChunk)
+    }})
 
 export const transform = async () => {
-    const readStream = fs.createReadStream(process.stdin);
-
-
+    process.stdin.pipe(reverseStream).pipe(process.stdout);
+    console.log(process.stdin)
 };
+await transform()
