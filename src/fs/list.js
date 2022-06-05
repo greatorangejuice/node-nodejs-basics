@@ -1,3 +1,20 @@
+import fs from 'fs';
+import {getDirname, invokeError} from "./utils.js";
+import path from 'path';
+
 export const list = async () => {
-    // Write your code here 
+    const __dirname = getDirname();
+    const dest = path.join(__dirname, 'files');
+
+
+    if (!fs.existsSync(dest)) {
+        invokeError('FS operation failed')
+    }
+    fs.readdir(dest, (err, files) => {
+        if (err) {
+            invokeError('FS operation failed')
+        }
+        console.log(files)
+    });
 };
+list()
