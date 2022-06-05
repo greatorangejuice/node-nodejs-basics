@@ -1,7 +1,7 @@
 import fs from 'fs'
 import readline from 'readline'
 import {fileURLToPath} from "url";
-import {dirname} from "path";
+import path, {dirname} from "path";
 
 const getDirname = () => {
     const __filename = fileURLToPath(import.meta.url)
@@ -10,8 +10,8 @@ const getDirname = () => {
 
 export const read = async () => {
     const __dirname = getDirname();
-    const path = `${__dirname}/files/fileToRead.txt`
-    const readStream = fs.createReadStream(path);
+    const dest = path.join(__dirname, 'files', 'fileToRead.txt');
+    const readStream = fs.createReadStream(dest);
     const rl = readline.createInterface({
         input: readStream,
         crlfDelay: Infinity

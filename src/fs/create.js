@@ -1,9 +1,10 @@
 import fs from 'fs';
 import {getDirname, invokeError} from './utils.js'
+import path from 'path';
 
 export const create = async () => {
     const __dirname = getDirname();
-    const dest = `${__dirname}/files/fresh.txt`;
+    const dest = path.join(__dirname, 'files', 'fresh.txt');
     try {
         if (fs.existsSync(dest)) {
             invokeError('FS operation failed')

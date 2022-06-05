@@ -1,5 +1,5 @@
 import {fileURLToPath} from "url";
-import {dirname} from "path";
+import path, {dirname} from "path";
 import fs from 'fs';
 
 const getDirname = () => {
@@ -7,8 +7,8 @@ const getDirname = () => {
     return dirname(__filename);
 }
 export const write = async () => {
-    const path = `${getDirname()}/files/fileToWrite.txt`
-    const writeStream = fs.createWriteStream(path);
+    const dest = path.join(getDirname(), 'files', 'fileToWrite');
+    const writeStream = fs.createWriteStream(dest);
     writeStream.write(JSON.stringify(process.stdin), 'utf8')
 
 };
